@@ -1,10 +1,12 @@
-import 'package:bon_enlevement/Enlevement.dart';
-import 'package:bon_enlevement/Enlevemntdata.dart';
-import 'package:bon_enlevement/TestPdf.dart';
-import 'package:bon_enlevement/testDao.dart';
+import 'package:bon_enlevement/Xml/DaoGuideAlcoo.dart';
+import 'package:bon_enlevement/metier/Enlevemntdata.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'Enlevement.dart';
+import 'TestPdf.dart';
 
+//l'ecran expedition est utiliser pour saisire toute les information relative a l'eau de vie Expedier
+//l'ecran receoit une Instance de data enlevement qui est envoyer par l'ecran Enlevement
 class Expedition extends StatefulWidget {
   EnlevementData  _lesdataCalcul ;
   Expedition(EnlevementData enlev){
@@ -29,23 +31,26 @@ class _Expedition extends State<Expedition> {
       return Enlevement(enlev: widget._lesdataCalcul,);//(lesInfos: data,);
     }));
   }
-  void getPdf() async{
 
+  //cette methode est appeler quand l'utilisateur a finis la saisie alors il apuis sur le bouton enregistre,
+  //la methode va alors editer le document pdf grace a la methode writeOnPdf
+  //puis le popup d'impression va s'ouvrir pour permetre a l'utilisateur d'imprimmer ou de telecharger la pdf
+  void getPdf() async{
       widget._lesdataCalcul.setArrondi(controlSai(_controllerVolArr.text));
       GenerPdf.writeOnPdf(widget._lesdataCalcul);
       GenerPdf.impresion();
-      /*await Navigator.push(
-          context, new MaterialPageRoute(builder: (BuildContext context)
-      {
-        return GenerPdf(lesData: this._lesdataCalcul,);
-      }));*/
   }
 
+  //cette methode permet d'instancier un objet DapGuideAlcoo afin de creer la list de GuideAlcoo'
   readFeuilleBlanche() async{
     test = await DefaultAssetBundle.of(context).loadString('assets/data/FeuilleBlanche.xml');
     leDoc = new DocXml(test);
     leDoc.generationFeuilleBlanche();
   }
+
+  //cette Methode a pour but de controler la saisie de l'utilisateur
+  //elle verifie si la saisie peut etre convertie en double et revoie une Exception si ce n'est pas le cas
+  //cette methode permet d'utiliser une virgule pour la saisie des chiffre
   double controlSai(String uneMesure){
     String mesureRetourner;
     if(double.tryParse(uneMesure) == null) {
@@ -56,7 +61,6 @@ class _Expedition extends State<Expedition> {
         mesureRetourner = '$uniter.$dixieme';
       }
       else {
-        //snack;
         mesureRetourner= '#';
       }
     }
@@ -66,6 +70,10 @@ class _Expedition extends State<Expedition> {
     return double.parse(mesureRetourner);
 
   }
+
+  //l'initState permet de remplir les champs automatiqument si des textfield on été saisie et que l'utilisateur retourne sur l'ecran pour finir la saisie
+  //si aucun champ n'a ete saisie alors les champs reste vide et les text affiche qui sont calculer sont initialiser a 0
+
   @override
   initState() {
     super.initState();
@@ -151,6 +159,8 @@ class _Expedition extends State<Expedition> {
                     child: TextField(
                     controller: _temperature,
                     keyboardType: TextInputType.text,
+                    //chaque textefield est verifier en temps reel si la saisie est correct ou non
+                      //si la saisie a mal faite alors le booleen de verification ce positionne sur true et l'errorText se met alors a s'afficher
                     onChanged: (String uneTemperature) {
                       try{
                         setState(() {
@@ -209,12 +219,12 @@ class _Expedition extends State<Expedition> {
                 RaisedButton(
                     onPressed: () {
                   setState(() {
-                    //_lesdataCalcul =  new EnlevementData(_temperature, _degre,_volumeAP, leDoc.listFeuilleB);
-
+                    //ce bouton effectue le calcul pour conaitre toute les information dont l'utilisateur a besoin
                     widget._lesdataCalcul.doCalcul(temp: controlSai(_temperature.text), degre: controlSai(_degre.text), volAp: controlSai(_volumeAP.text), unGuide: leDoc.listFeuilleB);
                     _coeficient = widget._lesdataCalcul.getCoeficient();
                     _degreRectif = widget._lesdataCalcul.getDegreReel();
                     _volAchar = widget._lesdataCalcul.getVolumeACharger();
+                    //ce boolean a pour but de signaler a l'utilisateur qu'il doit saisire le champ du Volume Arrondie A charger
                     _verifVolArr = true;
                   });
                 },
@@ -392,6 +402,8 @@ class _Expedition extends State<Expedition> {
                         .size
                         .width / 16,),
                   child: RaisedButton(onPressed: (){
+                    //le bouton retour fait retourner l'utilisateur sur l'ecran d'enlevement,
+                    //lorsque l'ecran est appeler le methode getEnlev envoie l'instance de de EnlevementData pour garder en memoire les modifications apporter
                     Navigator.of(context).pop();
                     getEnlev();
                     setState(() {

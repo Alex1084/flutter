@@ -1,6 +1,10 @@
 import 'GuideAlcoo.dart';
 
 class EnlevementData{
+  //l'enlevement data est la classe que va etre utiliser tout au long de l'enlevement chaque atribut equivaut a
+  // une valeur saisie ou calculer
+  //lesvaleur sasie sont les information relative(date vitivulteur, presence etc..) et l'enfoncement Mesure, la temperature ainsi que l'alcool pur a Expedier(volApAchar);
+  //tout les autre Atribut sont quant a eu calculer dans la methode do calcul
   String _date;
   String _viticulteur, _immatriculation, _destination, _viticulteurPresent ;
   double _temp, _degM, _degR, _coef;
@@ -14,9 +18,6 @@ class EnlevementData{
     this._degR = 0.00;
     this._coef = 0.00;
     this._volHalpChar = 0.00;
-    //this.unGuide = new List.empty();
-    //this._degR = rechercheDegre(unGuide, this._degM, this._temp);
-    //this._coef = rechercheCoef(unGuide, this._degM, this._temp)/1000;
     this._viticulteur = '';
     this._immatriculation = '';
     this._destination = '';
@@ -24,6 +25,7 @@ class EnlevementData{
 
   }
 
+  //cette methode est utiliser pour recherche l'enfoncement reel, le coeficient puis faire tout les calcul ce trouvant dans la region les calcul
   void doCalcul(
       {double temp, double degre, double volAp, List<GuideAlcoo> unGuide}){
     this._temp = temp;
@@ -40,7 +42,8 @@ class EnlevementData{
   }
 
 
-
+ //cette methode va chercher dans la liste de guideAlcoo pour retourner l'enfoncement reel grace a le temperature et l'enfoncement lu
+  //la liste unGuide est obtenue grace au getteur se trouvent dans le document DaoGuideAlcoo
   double rechercheDegre(List<GuideAlcoo> unGuide, double unDegreMesure,double uneTemperature) {
     double degreRectifie = 0;
     int degreRangeMesure;
@@ -72,7 +75,8 @@ class EnlevementData{
       return -1;
     }
   }
-
+  //cette methode va chercher dans la liste de guideAlcoo pour retourner le coeficient grace a le temperature et l'enfoncement lu
+  //   //la liste unGuide est obtenue grace au getteur se trouvent dans le document DaoGuideAlcoo
   double rechercheCoef(List<GuideAlcoo> unGuide, double unDegreMesure,double uneTemperature){
     double coeficient = 0;
     int degreRangeMesure;
@@ -104,6 +108,11 @@ class EnlevementData{
       return -1;
     }
   }
+
+  //#region les calcul
+
+  //chaque methode retourne la valeur effctuer par le calcul chacun de ces resultat seront par le suite affiche dans le docuent Pdf
+  //chaque Methode se suit plus ou moins donc la methode calculAcharger a besion de la methode calculVolumeBrute etc ...
   double calculVolumeBrut(double volHalpAChar,double degR){
     return double.parse((100*(volHalpAChar/degR)).toStringAsFixed(4));
   }
@@ -122,6 +131,7 @@ class EnlevementData{
   double calculVolAPChar(double unVolArr, double degR, double coeficient){
     return double.parse((unVolArr * degR* coeficient/100).toStringAsFixed(4));
   }
+  //#endregion
   //#region les Getteurs
   String getViticulteur(){
     return this._viticulteur;
@@ -169,7 +179,7 @@ class EnlevementData{
     return this._volHalpChar;
   }
   //#endregion
-
+  //#region les Setteur
   void setArrondi(double value){
     this._volArr = value;
     this._volRectif = recifier(this._volArr, this._coef);
@@ -190,4 +200,5 @@ class EnlevementData{
   void setDest(String value){
     this._destination = value;
   }
+  //#endregion
 }

@@ -1,7 +1,11 @@
-import 'package:bon_enlevement/DaoEpallement.dart';
-import 'package:bon_enlevement/testDao.dart';
+import 'package:bon_enlevement/Xml/DaoEpallement.dart';
+import 'package:bon_enlevement/Xml/DaoGuideAlcoo.dart';
 import 'package:flutter/material.dart';
 
+
+//cette ecran n'a pas pue etre finis par manque de temps
+//il doit permetre de reconnaitre le volume d'alcool en fonction de la auteur lue sur a jauge d'appalement
+//après cela en saisissant l'enfoncement et la temperature l'aplication doit renvoyer l'enfoncement Reel et le voulume en alcool pur pour etre sauvegarder par les suite
 class ReconnNiv extends StatefulWidget{
 
   @override
@@ -54,6 +58,8 @@ class _ReconnNiv extends State<ReconnNiv>{
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                //les bouton Radio devait pour etre un choix pour l'utilisateur et lui permetre de lire l'nefoncement reel avec les Page Jaune
+                //ou les page Blanche
                 Container(
                   child: Row(
                     children :[
@@ -80,6 +86,8 @@ class _ReconnNiv extends State<ReconnNiv>{
               ],
             ),
             DropdownButton(
+              //le drop down Button est utiliser pour choisir la cuve que
+              // l'on veux mesure chaque cuve a un fichier different alors l'item dois avoir le meme nom que le fochier
                 value: dropdownValue,
 
                 items: <String>['10', '11', '12', '13', '14E', '24_chais', '25_chais', '30', '30BC', 'E1', 'E2']

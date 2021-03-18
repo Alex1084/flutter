@@ -1,7 +1,9 @@
 import 'package:xml/xml.dart';
 
+
+//cette class a pour but de parcourir le fichier appeler
+//cette class est utiliser dans l'ecran reconnNiv donc les fonctinaliter de cette classe n'ont pas pue etre très developpe
 class DaoEpallement{
-  String _titre;
   Map<double, double> _tableEpallement;
   XmlDocument _doc;
 
