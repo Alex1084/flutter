@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             RaisedButton(onPressed: getEnlevement,
 
-            child :Text('Bon d\'enlevement'
+            child :Text('Bon d\'enlèvement'
               ),
             ),
             RaisedButton(onPressed: getreconLvl,

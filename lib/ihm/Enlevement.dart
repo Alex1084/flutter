@@ -55,7 +55,7 @@ class _Enlevement extends State<Enlevement> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Enlevement'),
+        title: Text('Enlèvement'),
       ),
       body: Center(
         child:
@@ -94,7 +94,7 @@ class _Enlevement extends State<Enlevement> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)
                     ),
-                    labelText: 'Viticulteur Present',
+                    labelText: 'Viticulteur Présent',
                   ),
                   controller: _controllerPresent,
                 ),

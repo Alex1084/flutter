@@ -33,6 +33,8 @@ class GenerPdf {
                   mainAxisAlignment: pw.MainAxisAlignment.center,
                   children: [
                     pw.Row(
+                      mainAxisAlignment: pw.MainAxisAlignment.center,
+                      crossAxisAlignment: pw.CrossAxisAlignment.center,
                       children: <pw.Widget>[
                         pw.Container(
                           height: 183,
@@ -40,8 +42,8 @@ class GenerPdf {
                           decoration: pw.BoxDecoration(
                             border: pw.Border.all(width: 1,),
                           ),
-                          child: pw.Text('Image du camp Romain',
-                            style: pw.TextStyle(fontSize: 16,),),
+                          child: pw.Text('camp Romain',
+                            style: pw.TextStyle(fontSize: 24,),),
                         ),
                         pw.Container(
                           height: 183,

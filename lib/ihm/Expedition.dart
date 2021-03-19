@@ -141,7 +141,7 @@ class _Expedition extends State<Expedition> {
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
-                    labelText: 'Volume AP a charger',
+                    labelText: 'Volume AP à charger',
                     errorText: (_verifVolAp == true ? 'erreur de saisie' : null),
                     filled : true,
                     fillColor: Colors.blue[200],
@@ -178,7 +178,7 @@ class _Expedition extends State<Expedition> {
                       errorText: (_verifTemp == true ? 'erreur de saisie' : null),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)),
-                      labelText: 'Temperature',
+                      labelText: 'Température',
                       filled : true,
                       fillColor: Colors.blue[200],
                     ),
@@ -248,7 +248,7 @@ class _Expedition extends State<Expedition> {
                     height:50,
                     width:  MediaQuery.of(context).size.width/2.5,
                     margin: EdgeInsets.only(left : MediaQuery.of(context).size.width / 16 ),
-                    child : Text('Enfoncement Reèl : ${_degreRectif}',
+                    child : Text('Enfoncement Réel : ${_degreRectif}',
                       style: TextStyle(fontSize: 18,),
                       textAlign: TextAlign.center,
                     ),
