@@ -98,8 +98,7 @@ class GenerPdf {
   //chaque ligne a deux parametre obligatoire le 'nom'/'type' de donne et la donne (qui se trouve dans l'instance de EnlevementData)
   //les Parametre optionnele sont plus pour les Donne concernant l'expedition d'eau de vie elle permete d'ajouter une nouvelle case avec l'uniter de mesure de la pese
   // la margin quant a elle est utiliser pour faire la separation entre les information est l'expedition
-  static pw.Widget RowPdf(String nom, String donnee,
-      {double margin = 0.00, bool unit = false, String uniter = '',}) {
+  static pw.Widget RowPdf(String nom, String donnee, {double margin = 0.00, bool unit = false, String uniter = '',}) {
     return pw.Row(
         children: [
           pw.Container(
